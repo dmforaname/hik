@@ -11,10 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes([
+    'register' => false, 
+    'verify' => false, 
+  ]);
+
+Route::get('/loggedin', 'HomeController@apps');
+Route::get('/loggedout', 'HomeController@apps');
+
+Route::middleware(['auth', 'auth-check'])->group(function () {
+
+    Route::get('/', 'HomeController@apps')->name('home');
+    Route::get('/{any}', 'HomeController@apps')->where('app', '.*');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

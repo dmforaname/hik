@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,28 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+    * The user has logged out of the application.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return mixed
+    */
+    public function logout(Request $request)
+    {
+        //$user = \App\User::find($request->user()->id);
+
+        $request->user()->tokens->each(fn($token) => $token->revoke() );
+
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+ 
+        if ($request->wantsJson()) {
+            return response()->json([], 204);
+        }
+
+        return redirect('/'); 
     }
 }

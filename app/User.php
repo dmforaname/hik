@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Role', 'user_roles', 'user_id', 'role_id');
     }
+
+    public function getRoleAttribute()
+    {
+        return $this->with('roles')->first()->roles->first()->name;
+    }
 }

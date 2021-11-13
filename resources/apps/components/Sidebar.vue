@@ -30,7 +30,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a href="#" class="nav-link" :class="{'active' : hrMenu}">
+                    <a href="#" class="nav-link" >
                     <i class="nav-icon fas fa-copy"></i>
                     <p>
                         Main Menu

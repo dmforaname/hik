@@ -19,9 +19,6 @@ class RoleSeeder extends Seeder
 
         foreach ($data as $item) {
             
-            $role = Role::where('name',$item['name'])->first();
-
-            if(!$role)
                 Role::firstOrCreate($item);
         }
     }

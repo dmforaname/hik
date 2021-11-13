@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
 
                 $role = Role::where('name',$item['role'])->first()->id;
                 unset($item['role']);
-                $user = User::firstOrCreate($item);
+                $user = User::Create($item);
                 $user->roles()->attach($role);
             }
                 

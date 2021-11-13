@@ -29,4 +29,7 @@ Route::group([
    
     Route::resource('users', 'UserController')
         ->only(['index','show','store','update','destroy']);
+
+    Route::resource('menus', 'MenuController')
+        ->only(['index','show','store','update','destroy']);    
 });

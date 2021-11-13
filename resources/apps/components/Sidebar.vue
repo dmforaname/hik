@@ -30,11 +30,11 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a href="#" class="nav-link" >
+                    <a @click.prevent="goto(routes.createorder)" class="nav-link" :class="{'active' : $route.path === routes.createorder  }" :href="routes.createorder ">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>
-                        Main Menu
-                        <i class="fas fa-angle-left right"></i>
+                        Create Order
+                        <!--<i class="fas fa-angle-left right"></i>-->
                         
                     </p>
                     </a>
@@ -68,7 +68,7 @@ export default {
         return {
 
             routes:{
-                
+                createorder: '/createorder',
             }
            
         }
@@ -77,7 +77,7 @@ export default {
     methods:{
             goto(to) {
 
-                //console.log('to: ' +to)
+                console.log('to: ' +to)
 
                 if(this.$route.path == to)
                     EventBus.$emit('reloadPage')
@@ -86,8 +86,6 @@ export default {
             },
             loadMenu(){
                 let path = this.$route.path
-
-                //console.log('load menu: ',path)
             },
             logout() {
                 

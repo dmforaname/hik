@@ -3,10 +3,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
-//import VueAxios from 'vue-axios';
-//import Axios from 'axios';
 import store from './store'
-//Vue.use(VueRouter,VueAxios,Axios);
 import routes from './routers'
 import App from './components/App.vue';
 import { ClientTable, ServerTable } from 'vue-tables-2'
@@ -15,8 +12,6 @@ import 'vue-toastr-2/dist/vue-toastr-2.min.css'
 import Vuelidate from 'vuelidate'
 import 'vue-search-select/dist/VueSearchSelect.css'
 
-//const router = new VueRouter({ mode: 'history', routes: routes });
-//new Vue(Vue.util.extend({ router }, App)).$mount("#app");
 
 window.toastr = require('toastr')
  

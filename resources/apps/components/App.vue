@@ -18,7 +18,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <breadcrumb></breadcrumb>
+                    <!--<breadcrumb></breadcrumb>-->
                 </section>
 
                 <!-- Main content -->

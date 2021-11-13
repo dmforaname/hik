@@ -46,7 +46,7 @@ router.beforeEach((to, from, next) => {
       //const now = new Date()
       store.commit('login', to.query.token)
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + to.query.token
-      next({ path: '/' });
+      next({ path: (to.query.url) ?? '/admin' })
     }
 
     // Check login time expired
@@ -91,5 +91,6 @@ router.beforeEach((to, from, next) => {
 const app = new Vue({
     el: '#app',
     router,
+    store,
     render: (h) => h(App)
 });

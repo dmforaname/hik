@@ -57,6 +57,7 @@ import sidebar from './Sidebar.vue'
 import navbar from './Navbar.vue'
 import footers from './Footer.vue'
 import breadcrumb from './Breadcrumb.vue'
+import { mapState } from 'vuex'
 
 export default {
     components:{
@@ -66,8 +67,46 @@ export default {
         footers,
         breadcrumb
     },
+    data() {
+
+        return {
+
+            timeOut:10000
+        }
+    },
+    computed:{
+
+        ...mapState(['user', 'userLoaded']),
+
+        //isAdmin(){
+        //    return this.user.is_admin === 1
+        //}
+    },
     mounted() {
+        
         console.log('Component mounted.')
-    }
+        
+        // Get user state
+        if (localStorage.getItem('token') != null && localStorage.getItem('token') != "undefined") {
+            
+            this.$store.dispatch('getUserInfo')
+
+            this.timeOut = 3000
+        }
+
+        // Check is_admin 
+        setTimeout(() => {
+       
+            //console.log('is_admin : '+this.isAdmin)
+            //console.log('timeOut : '+this.timeOut)
+
+            //if (!this.isAdmin){
+
+            //    location.href = '/'
+            //}
+
+        }, this.timeOut);
+    },
+    
 }
 </script>

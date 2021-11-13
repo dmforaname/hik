@@ -16,5 +16,5 @@ mix.js('resources/js/app.js', 'public/js')
   
 mix.js(['resources/apps/app.js',
    'resources/apps/assets/js/adminlte.min.js',
-   'resources/apps/assets/js/demo.js'], 'public/js/admin').sourceMaps()
-   .sass('resources/apps/assets/style.scss', 'public/css/admin');      
+   'resources/apps/assets/js/demo.js'], 'public/js/apps').sourceMaps()
+   .sass('resources/apps/assets/style.scss', 'public/css/apps');      

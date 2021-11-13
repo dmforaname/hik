@@ -1,0 +1,145 @@
+
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+@import './css/adminlte.css';
+@import 'variables';
+
+
+.vue-tables-custom-style
+{
+    thead th
+    {
+        padding: 13px 8px;
+        border-width: 4px;
+        border-color: #FFF;
+        background: #DCDCDC !important;
+
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 14px;
+        text-transform: capitalize;
+        color: #222222;
+        //text-align: center;
+        text-align: left;
+    }
+
+    tbody td
+    {
+        padding: 12px 8px;
+        border-width: 4px;
+        border-color: #FFF;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        text-transform: capitalize;
+        color: #222222;
+    }
+
+    .VueTables__sortable
+    {
+        cursor: pointer;
+    }
+
+    .VueTables__sort-icon
+    {
+        margin-left: 5px !important;
+    }
+}
+
+
+.VuePagination
+{
+    border-top: 1px solid #B6B6B6;
+    padding-top: 20px;
+    margin:0 !important;
+    padding-left: 0 !important;
+
+    nav
+    {
+        width: 100%;
+    }
+
+    .VuePagination__count
+    {
+        float: left !important;
+        width: auto !important;
+    }
+
+    .pagination
+    {
+        float:right !important;
+
+        .VuePagination__pagination-item-next-page {
+            .page-link {
+                content: ' ' !important;
+                color: transparent !important;
+            }
+            .page-link:before {
+                right: 6px;
+                position: absolute;
+                color: #000000 !important;
+                content: url(./img/ArrowR.svg);
+            }
+        }
+
+        .VuePagination__pagination-item-next-chunk{
+            .page-link {
+                content: ' ' !important;
+                color: transparent !important;
+            }
+            .page-link:before {
+                right: 6px;
+                position: absolute;
+                color: #000000 !important;
+                // content: url(../img/ArrowFR.svg);
+                content: none;
+            }
+        }
+
+
+        .VuePagination__pagination-item-prev-page {
+            .page-link {
+                content: ' ' !important;
+                color: transparent !important;
+            }
+            .page-link:before {
+                right: 6px;
+                position: absolute;
+                color: #000000 !important;
+                content: url(./img/Arrow.svg);
+            }
+        }
+
+        .VuePagination__pagination-item-prev-chunk{
+            .page-link {
+                content: ' ' !important;
+                color: transparent !important;
+            }
+            .page-link:before {
+                right: 6px;
+                position: absolute;
+                color: #000000 !important;
+                // content: url(../img/ArrowF.svg);
+                content: none;
+            }
+        }
+
+        .page-link
+        {
+            color: #42505C !important;
+            border: none !important;
+            cursor: pointer;
+
+            &.active
+            {
+                border-radius:5px !important;
+                background: $primary-color !important;
+                color: #FFF !important;
+            }
+        }
+    }
+}
+

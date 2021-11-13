@@ -1,0 +1,39 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Montserrat', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #0035AC;
+$blueMain: #0035AC;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+$electricPurple: #b52fe4;
+
+//colors
+//$primary-color: #7561C7;
+$primary-color: #3c8dbc;
+
+//text colors
+$text-primary-color: #7561C7;
+$text-default-color: #4C4F80;
+
+//btn colors
+$btn-primary-bg: linear-gradient(270deg, #6C2AC0 1.11%, #7561C7 98.95%);
+$btn-primary-focused-bg: linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), linear-gradient(270deg, #6C2AC0 1.11%, #7561C7 98.95%);
+$btn-outline-primary-bg: #651A81;
+
+$btn-success-bg: #22DC99;
+$btn-success-focused-bg: #22DC99;
+$btn-outline-success-bg: #22DC99;

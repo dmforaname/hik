@@ -78,9 +78,15 @@ export default {
 
         ...mapState(['user', 'userLoaded']),
 
-        //isAdmin(){
-        //    return this.user.is_admin === 1
-        //}
+        isAdmin(){
+            return this.user.role === 'kasir' || this.user.role === 'pelayan'
+        },
+        isKasir(){
+            return this.user.role === 'kasir'
+        },
+        isPelayan(){
+            return this.user.role === 'pelayan'
+        }
     },
     mounted() {
         
@@ -91,19 +97,18 @@ export default {
             
             this.$store.dispatch('getUserInfo')
 
-            this.timeOut = 3000
+            this.timeOut = 5000
         }
 
         // Check is_admin 
         setTimeout(() => {
        
-            //console.log('is_admin : '+this.isAdmin)
-            //console.log('timeOut : '+this.timeOut)
+            console.log('is_admin : '+this.isAdmin)
 
-            //if (!this.isAdmin){
+            if (!this.isAdmin){
 
-            //    location.href = '/'
-            //}
+                location.href = '/'
+            }
 
         }, this.timeOut);
     },

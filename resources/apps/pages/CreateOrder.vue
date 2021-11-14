@@ -24,6 +24,8 @@
                     class="form-control" 
                     v-model="form.table"
                     placeholder="Table Number"
+                    min="0"
+                    max="25"
                     >
                 </div>
             </div>
@@ -124,7 +126,8 @@ export default {
     },
     methods: {
         add(index) {
-            this.form.order.push({ name: '' });
+            console.log('add Index: '+index)
+            this.form.order.push({ menu_id: '' });
         },
         remove(index) {
             this.form.order.splice(index, 1);
@@ -213,9 +216,6 @@ export default {
         addData() {
 
             console.log('add_data')
-            
-
-            
 
             axios.post('/api/v1/orders', {
 
@@ -226,7 +226,7 @@ export default {
             }).then(response => {
                 
                 this.$toastr.success(response.data.message)
-                
+                this.resetForm()
                     
             }).catch(err=>{
 
@@ -235,6 +235,24 @@ export default {
             });
             
         },
+        resetForm() {
+            
+            var self = this; 
+
+            console.log(self)
+
+            Object.keys(this.form).forEach(function(key,index) {
+                self.form[key] = '';
+                
+            });
+
+            self.form.order = [{
+                    menu_id: '',
+                    qty:'',
+                    notes:'',
+                }]
+            self.totalMakanan = 0    
+        },  
     },
     mounted(){
 

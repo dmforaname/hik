@@ -3,7 +3,7 @@
         <!-- Default box -->
         <div class="card">
         <div class="card-header">
-            <h3 class="card-title">{{this.pageTitle}} {{this.totalMakanan}}</h3>
+            <h3 class="card-title">{{this.pageTitle}}</h3>
 
             <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -16,18 +16,21 @@
         </div>
         <div class="card-body">
         <!-- input form -->
-            
-            <div class="form-group row" v-for="(input,k) in form" :key="k">
+            <h4>Order Makanan</h4>
+            <div class="row" v-for="(input,k) in form" :key="k">
                 <!--<input type="text" class="form-control" v-model="input.name">-->
                 <div class="col-sm-4">
+                    <label>Menu</label>
                     <model-select 
                     :options="optionsSelect"
                     v-model="input.name"
                     @input="onSelect($event)"
                     ref="createOrder"
+                    class="form-control" 
                     ></model-select>
                 </div>
                 <div class="col-sm-1">
+                    <label>Quantity</label>
                     <input 
                     type="text" 
                     class="form-control" 
@@ -35,19 +38,28 @@
                     >
                 </div>
                 <div class="col-sm-2">
+                    <label>Price</label>
                     <input 
                     type="text" 
                     class="form-control" 
                     :value="myPrice(input.name,input.qty)"
                     >
                 </div>
-                <div class="col-sm-2">
-                    <i class="fas fa-minus-circle" @click="remove(k)" v-show="k || ( !k && form.length > 1)"></i>
-                    <i class="fas fa-plus-circle" @click="add(k)" v-show="k == form.length-1"></i>
+                <div class="col-sm-2 button-plus-minus">
+                    
+                    <i class="fas fa-minus-circle fa-2x" @click="remove(k)" v-show="k || ( !k && form.length > 1)"></i>
+                    <i class="fas fa-plus-circle fa-2x" @click="add(k)" v-show="k == form.length-1"></i>
                 </div>
+
+                
             </div>
-
-
+   
+            <div class="row total-price">
+                <div class="col col-sm-5">Total </div>
+                <div class="col col-sm-2"> Rp. {{this.totalMakanan}} ,-</div>
+              
+            </div>
+            
         <!-- end input form -->    
         </div>
         <!-- /.card-body -->
@@ -119,7 +131,7 @@ export default {
         onSelect (e) {
             
             console.log('Select:',e)
-            console.log('input.name '+this.form[0].qty)
+            //console.log('input.name '+this.form[0].qty)
 
             //let select = this.optionsSelect
             //let item = select.find(el => el.value === e)
@@ -150,8 +162,6 @@ export default {
         },
         getTotalMakanan()
         {
-            console.log(JSON.stringify(this.form))
-
             const options = this.form.map(item => {
 
                 const container = {}
@@ -169,7 +179,7 @@ export default {
                 return container
             })
 
-            console.log('total :',JSON.stringify(options))
+            //console.log('total :',JSON.stringify(options))
 
             this.totalMakanan = options.reduce(function(sum, current) {
                                     return sum + current.price;
@@ -188,3 +198,13 @@ export default {
 
 
 </script>
+<style>
+.button-plus-minus {
+
+    padding-top: 2.75%;
+}
+.total-price {
+
+    padding-top: 1%;
+}
+</style>

@@ -117,7 +117,7 @@ export default {
         },
         getMenu(){
             
-            axios.get('/api/v1/menus?select=makanan')
+            axios.get('/api/v1/menus?select=all')
                 .then((response) => {
                     
                     const options = response.data.data.map(item => {

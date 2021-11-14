@@ -70,4 +70,13 @@ class BaseRepository implements RepositoryInterface
     {
         return $this->model->Uuid($param);
     }
+
+    /**
+     *
+     * @return mixed
+     */
+    public function get()
+    {
+        return $this->model->get();
+    }
 }

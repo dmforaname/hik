@@ -34,4 +34,10 @@ interface RepositoryInterface
      * @return mixed
      */
     public function uuid(string $param);
+
+    /**
+     *
+     * @return mixed
+     */
+    public function get();
 }

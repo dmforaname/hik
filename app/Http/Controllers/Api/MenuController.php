@@ -27,7 +27,8 @@ class MenuController extends Controller
     {
         if(request()->select){
 
-            $data = $this->menu->getSelect(request()->select);  
+            //$data = $this->menu->getSelect(request()->select);  
+            $data = $this->menu->get();  
             return $this->success($data,trans('message.retrieve',['X' => 'Menu'])); 
         }
     }

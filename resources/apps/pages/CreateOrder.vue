@@ -17,40 +17,50 @@
         <div class="card-body">
         <!-- input form -->
             <h4>Order Makanan</h4>
-            <div class="row" v-for="(input,k) in form" :key="k">
+            <div class="form-row" v-for="(input,k) in form" :key="k">
                 <!--<input type="text" class="form-control" v-model="input.name">-->
                 <div class="col-sm-4">
-                    <label>Menu</label>
                     <model-select 
                     :options="optionsSelect"
                     v-model="input.name"
                     @input="onSelect($event)"
                     ref="createOrder"
                     class="form-control" 
+                    placeholder="Pilih Menu"
                     ></model-select>
                 </div>
                 <div class="col-sm-1">
-                    <label>Quantity</label>
+                    
                     <input 
                     type="text" 
                     class="form-control" 
                     v-model="input.qty"
+                    placeholder="Qty"
                     >
                 </div>
                 <div class="col-sm-2">
-                    <label>Price</label>
+                    
                     <input 
                     type="text" 
                     class="form-control" 
                     :value="myPrice(input.name,input.qty)"
+                    readonly
                     >
                 </div>
-                <div class="col-sm-2 button-plus-minus">
+                <div class="col-sm-2">
                     
-                    <i class="fas fa-minus-circle fa-2x" @click="remove(k)" v-show="k || ( !k && form.length > 1)"></i>
-                    <i class="fas fa-plus-circle fa-2x" @click="add(k)" v-show="k == form.length-1"></i>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    v-model="input.notes"
+                    placeholder="Notes"
+                    >
                 </div>
+                <div class="col-sm-1">
 
+                    <i class="fas fa-minus-circle fa-2x" style="color:red" @click="remove(k)" v-show="k || ( !k && form.length > 1)"></i>
+                    <i class="fas fa-plus-circle fa-2x" style="color:green" @click="add(k)" v-show="k == form.length-1"></i>
+                </div>
                 
             </div>
    
@@ -91,6 +101,7 @@ export default {
                 name: '',
                 qty:'',
                 price:'',
+                notes:'',
             }],
             optionsSelect: [],
             menuPrice:[],
@@ -199,12 +210,13 @@ export default {
 
 </script>
 <style>
-.button-plus-minus {
 
-    padding-top: 2.75%;
-}
 .total-price {
 
     padding-top: 1%;
+}
+.custom-btn {
+
+    margin-top:3.7%;
 }
 </style>

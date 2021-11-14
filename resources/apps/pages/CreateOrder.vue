@@ -20,15 +20,15 @@
             <div class="form-row">
                 <div class="col-sm-2">
                     <input 
-                    type="text" 
+                    type="number" 
                     class="form-control" 
-                    v-model="inputForm.table"
+                    v-model="form.table"
                     placeholder="Table Number"
                     >
                 </div>
             </div>
 
-            <div class="form-row" v-for="(input,k) in form" :key="k" style="padding-top:10px">
+            <div class="form-row" v-for="(input,k) in form.order" :key="k" style="padding-top:10px">
                 <!--<input type="text" class="form-control" v-model="input.name">-->
                 <div class="col-sm-4">
                     <model-select 
@@ -69,8 +69,8 @@
                 </div>
                 <div class="col-sm-1 s">
 
-                    <i class="fas fa-minus-circle fa-2x" style="color:red" @click="remove(k)" v-show="k || ( !k && form.length > 1)"></i>
-                    <i class="fas fa-plus-circle fa-2x" style="color:green" @click="add(k)" v-show="k == form.length-1"></i>
+                    <i class="fas fa-minus-circle fa-2x" style="color:red" @click="remove(k)" v-show="k || ( !k && form.order.length > 1)"></i>
+                    <i class="fas fa-plus-circle fa-2x" style="color:green" @click="add(k)" v-show="k == form.order.length-1"></i>
                 </div>
                 
             </div>
@@ -109,26 +109,25 @@ export default {
         return {
 
             pageTitle : this.$route.meta.title,
-            form: [{
-                
-                menu_id: '',
-                qty:'',
-                notes:'',
-            }],
+            form:{
+                table:'',
+                order:[{
+                    menu_id: '',
+                    qty:'',
+                    notes:'',
+                }],
+            },
             optionsSelect: [],
             menuPrice:[],
             totalMakanan:'',
-            inputForm:{
-                table:'',
-            },
         }
     },
     methods: {
         add(index) {
-            this.form.push({ name: '' });
+            this.form.order.push({ name: '' });
         },
         remove(index) {
-            this.form.splice(index, 1);
+            this.form.order.splice(index, 1);
         },
         getMenu(){
             
@@ -188,13 +187,13 @@ export default {
         },
         getTotalMakanan()
         {
-            const options = this.form.map(item => {
+            const options = this.form.order.map(item => {
 
                 const container = {}
 
-                if (item.name) {
+                if (item.menu_id) {
 
-                    var price = this.getPrice(item.name)
+                    var price = this.getPrice(item.menu_id)
                     container.price = price * item.qty
 
                 }else{
@@ -220,8 +219,8 @@ export default {
 
             axios.post('/api/v1/orders', {
 
-                order : this.form,
-                table : this.inputForm.table,
+                order : this.form.order,
+                table : this.form.table,
                 
                 
             }).then(response => {

@@ -4,20 +4,22 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\Api\MenuRepository;
 use App\Repositories\Api\OrderRepository;
+use App\Repositories\Api\ItemRepository;
 use App\Traits\ApiResponser;
 
-class MenuController extends Controller
+class OrderController extends Controller
 {
     use ApiResponser;
     /**
-     * @param MenuRepository $menuRep
+     * @param OrderRepository $orderRep
+     * @param ItemRepository $itemRep
      */
-    public function __construct(MenuRepository $menuRep)
+    public function __construct(OrderRepository $orderRep,ItemRepository $itemRep)
     {
-        $this->menu = $menuRep;
-    }    
+        $this->order = $orderRep;
+        $this->item = $itemRep;
+    }   
 
     /**
      * Display a listing of the resource.
@@ -26,12 +28,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        if(request()->select){
-
-            //$data = $this->menu->getSelect(request()->select);  
-            $data = $this->menu->get();  
-            return $this->success($data,trans('message.retrieve',['X' => 'Menu'])); 
-        }
+        //
     }
 
     /**
@@ -52,7 +49,26 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $order_num = $this->order->orderNum();
+
+        $orders['table'] = $data['table'];
+        $orders['status'] = 'open';
+        $orders['order_number'] = $order_num;
+
+        $order = $this->order->create($orders);
+
+        foreach($data['order'] as $item):
+            
+            $item['order_id'] = $order->id;
+            $this->item->create($item);
+
+        endforeach;
+
+        
+        
+        return $this->success($data,trans('message.create',['X'=> 'Menu']),201);
     }
 
     /**

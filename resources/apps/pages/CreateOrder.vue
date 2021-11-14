@@ -16,13 +16,24 @@
         </div>
         <div class="card-body">
         <!-- input form -->
-            <h4>Order Makanan</h4>
-            <div class="form-row" v-for="(input,k) in form" :key="k">
+            
+            <div class="form-row">
+                <div class="col-sm-2">
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    v-model="inputForm.table"
+                    placeholder="Table Number"
+                    >
+                </div>
+            </div>
+
+            <div class="form-row" v-for="(input,k) in form" :key="k" style="padding-top:10px">
                 <!--<input type="text" class="form-control" v-model="input.name">-->
                 <div class="col-sm-4">
                     <model-select 
                     :options="optionsSelect"
-                    v-model="input.name"
+                    v-model="input.menu_id"
                     @input="onSelect($event)"
                     ref="createOrder"
                     class="form-control" 
@@ -43,7 +54,7 @@
                     <input 
                     type="text" 
                     class="form-control" 
-                    :value="myPrice(input.name,input.qty)"
+                    :value="myPrice(input.menu_id,input.qty)"
                     readonly
                     >
                 </div>
@@ -56,25 +67,27 @@
                     placeholder="Notes"
                     >
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-1 s">
 
                     <i class="fas fa-minus-circle fa-2x" style="color:red" @click="remove(k)" v-show="k || ( !k && form.length > 1)"></i>
                     <i class="fas fa-plus-circle fa-2x" style="color:green" @click="add(k)" v-show="k == form.length-1"></i>
                 </div>
                 
             </div>
-   
-            <div class="row total-price">
-                <div class="col col-sm-5">Total </div>
-                <div class="col col-sm-2"> Rp. {{this.totalMakanan}} ,-</div>
-              
+            <div class="form-row col-6" style="padding-top:10px">
+                <button 
+                type="button" 
+                ref="submitButton"
+                class="btn btn-primary btn-flat"
+                @click="addData()"
+                >Submit</button>
             </div>
             
         <!-- end input form -->    
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            Footer
+            Total Rp. {{this.totalMakanan}} ,-
         </div>
         <!-- /.card-footer-->
         </div>
@@ -98,14 +111,16 @@ export default {
             pageTitle : this.$route.meta.title,
             form: [{
                 
-                name: '',
+                menu_id: '',
                 qty:'',
-                price:'',
                 notes:'',
             }],
             optionsSelect: [],
             menuPrice:[],
-            totalMakanan:''
+            totalMakanan:'',
+            inputForm:{
+                table:'',
+            },
         }
     },
     methods: {
@@ -195,7 +210,32 @@ export default {
             this.totalMakanan = options.reduce(function(sum, current) {
                                     return sum + current.price;
                                 }, 0);
-        }
+        },
+        addData() {
+
+            console.log('add_data')
+            
+
+            
+
+            axios.post('/api/v1/orders', {
+
+                order : this.form,
+                table : this.inputForm.table,
+                
+                
+            }).then(response => {
+                
+                this.$toastr.success(response.data.message)
+                
+                    
+            }).catch(err=>{
+
+                var error = err.response.data.errors
+                this.err.title = error.title[0]                  
+            });
+            
+        },
     },
     mounted(){
 
@@ -214,9 +254,5 @@ export default {
 .total-price {
 
     padding-top: 1%;
-}
-.custom-btn {
-
-    margin-top:3.7%;
 }
 </style>

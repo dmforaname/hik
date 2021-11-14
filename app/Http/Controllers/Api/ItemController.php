@@ -4,21 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\Api\MenuRepository;
-use App\Repositories\Api\OrderRepository;
-use App\Traits\ApiResponser;
 
-class MenuController extends Controller
+class ItemController extends Controller
 {
-    use ApiResponser;
-    /**
-     * @param MenuRepository $menuRep
-     */
-    public function __construct(MenuRepository $menuRep)
-    {
-        $this->menu = $menuRep;
-    }    
-
     /**
      * Display a listing of the resource.
      *
@@ -26,12 +14,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        if(request()->select){
-
-            //$data = $this->menu->getSelect(request()->select);  
-            $data = $this->menu->get();  
-            return $this->success($data,trans('message.retrieve',['X' => 'Menu'])); 
-        }
+        //
     }
 
     /**

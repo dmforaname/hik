@@ -32,4 +32,7 @@ Route::group([
 
     Route::resource('menus', 'MenuController')
         ->only(['index','show','store','update','destroy']);    
+
+    Route::resource('orders', 'OrderController')
+        ->only(['index','show','store','update','destroy']);    
 });
